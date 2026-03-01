@@ -1,0 +1,157 @@
+# VectorShift — Pipeline Builder
+
+A visual drag-and-drop pipeline builder built as part of the VectorShift Frontend Technical Assessment. It lets you design, connect, and validate node-based pipelines entirely in the browser, with a FastAPI backend that checks whether the resulting graph is a valid DAG.
+
+---
+
+## What it does
+
+- Drag nodes from the sidebar onto the canvas
+- Connect them by drawing edges between handles
+- Write templates in the Text Node using `{{variable}}` syntax — handles appear automatically
+- Click **Run Pipeline** to send the graph to the backend and get back node/edge counts and DAG validation
+
+---
+
+## Nodes
+
+| Node | Purpose |
+|---|---|
+| **Input** | Entry point for data flowing into the pipeline |
+| **Output** | Terminal node that receives the final result |
+| **Text** | Template node with dynamic `{{variable}}` handle generation |
+| **LLM** | Represents a language model step |
+| **API** | Wraps an external API call |
+| **Image** | Handles image input or processing |
+| **Math** | Performs a numeric operation |
+| **Filter** | Filters data based on a condition |
+| **Condition** | Branches the pipeline on a boolean expression |
+
+All nodes share a single `BaseNode` component — adding a new node type is a matter of defining its fields and handles.
+
+---
+
+## Tech stack
+
+**Frontend**
+- React 18
+- React Flow (canvas + edge routing)
+- Zustand (global pipeline state)
+- MUI icons
+- react-hot-toast (submission feedback)
+- Vanilla CSS (no Tailwind)
+
+**Backend**
+- Python / FastAPI
+- Pydantic for request validation
+- Kahn's algorithm for DAG detection
+
+---
+
+## Project structure
+
+```
+.
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── App.js            # Root layout — navbar, sidebar, canvas
+│   │   │   ├── ui.js             # React Flow canvas setup
+│   │   │   ├── toolbar.js        # Sidebar with draggable node cards
+│   │   │   ├── submit.js         # Run Pipeline button + API call
+│   │   │   ├── draggableNode.js  # Draggable sidebar item
+│   │   │   └── ThemeContext.js   # Light/dark mode context
+│   │   ├── nodes/
+│   │   │   ├── BaseNode.js       # Shared node shell (handles, layout, style)
+│   │   │   ├── textNode.js       # Dynamic {{variable}} handle detection
+│   │   │   ├── inputNode.js
+│   │   │   ├── outputNode.js
+│   │   │   ├── llmNode.js
+│   │   │   ├── apiNode.js
+│   │   │   ├── imageNode.js
+│   │   │   ├── mathNode.js
+│   │   │   ├── filterNode.js
+│   │   │   ├── conditionNode.js
+│   │   │   └── index.js          # Node type registry
+│   │   ├── store/
+│   │   │   └── useStore.js       # Zustand pipeline state
+│   │   └── styles/
+│   │       └── App.css           # All styles, CSS variables, dark mode
+│   └── package.json
+│
+└── backend/
+    ├── main.py                   # FastAPI app + /pipelines/parse endpoint
+    └── requirements.txt
+```
+
+---
+
+## Getting started
+
+### Prerequisites
+
+- Node.js ≥ 16
+- Python ≥ 3.9
+
+### Backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+The API will be available at `http://localhost:8000`.
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+Open `http://localhost:3000` in your browser.
+
+---
+
+## API
+
+### `POST /pipelines/parse`
+
+Accepts the current pipeline and returns stats + DAG validity.
+
+**Request body**
+```json
+{
+  "nodes": [{ "id": "node-1" }, { "id": "node-2" }],
+  "edges": [{ "source": "node-1", "target": "node-2" }]
+}
+```
+
+**Response**
+```json
+{
+  "num_nodes": 2,
+  "num_edges": 1,
+  "is_dag": true
+}
+```
+
+DAG detection uses **Kahn's algorithm** (BFS-based topological sort). A pipeline with a cycle returns `is_dag: false`.
+
+---
+
+## Features worth noting
+
+- **Text Node `{{variable}}` detection** — parses the textarea content in real time with a regex, deduplicates variable names, and renders one input handle per unique variable. The card also auto-resizes its width using a `<canvas>` measurement pass.
+- **BaseNode abstraction** — every node renders through the same shell. Input/output handles, labels, icons, and card styles are all props. No duplicated markup across node types.
+- **Dark mode** — implemented via a React context and CSS custom properties. The toggle in the navbar persists across re-renders without any external library.
+- **Responsive sidebar** — collapses on mobile with a CSS transform (no layout reflow), and shows an overlay to close it on small screens.
+- **Toast notifications** — meaningful success and error states shown after pipeline submission, themed to match the current color mode.
+
+---
+
+## Author
+
+**Md Sarfaraz Alam** — VectorShift Frontend Technical Assessment
