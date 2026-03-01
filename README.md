@@ -1,37 +1,48 @@
 # VectorShift — Pipeline Builder
 
-A visual drag-and-drop pipeline builder built as part of the VectorShift Frontend Technical Assessment. It lets you design, connect, and validate node-based pipelines entirely in the browser, with a FastAPI backend that checks whether the resulting graph is a valid DAG.
+A visual drag-and-drop pipeline builder built as part of the VectorShift Frontend Technical Assessment. Design, connect, and validate node-based pipelines entirely in the browser, with a FastAPI backend that checks whether the resulting graph is a valid DAG.
+
+---
+
+## Screenshots
+
+<!-- Pipeline Builder Canvas -->
+![Pipeline Builder Canvas]()
+
+<!-- Node Connections & Edge Routing ]()
+
+<!-- DAG Validation Result -->
+![DAG Validation Result]()
 
 ---
 
 ## What it does
 
-- Drag nodes from the sidebar onto the canvas
-- Connect them by drawing edges between handles
-- Write templates in the Text Node using `{{variable}}` syntax — handles appear automatically
-- Click **Run Pipeline** to send the graph to the backend and get back node/edge counts and DAG validation
+Drag nodes from the sidebar onto the canvas, connect them by drawing edges between handles, and click **Run Pipeline** to send the graph to the backend. The backend returns node/edge counts and whether the graph is a valid directed acyclic graph.
+
+The Text Node has one extra trick: write `{{variable}}` anywhere in the template and an input handle appears automatically for that variable — in real time, with deduplication.
 
 ---
 
 ## Nodes
 
 | Node | Purpose |
-|---|---|
-| **Input** | Entry point for data flowing into the pipeline |
-| **Output** | Terminal node that receives the final result |
-| **Text** | Template node with dynamic `{{variable}}` handle generation |
-| **LLM** | Represents a language model step |
-| **API** | Wraps an external API call |
-| **Image** | Handles image input or processing |
-| **Math** | Performs a numeric operation |
-| **Filter** | Filters data based on a condition |
-| **Condition** | Branches the pipeline on a boolean expression |
+|------|---------|
+| Input | Entry point for data flowing into the pipeline |
+| Output | Terminal node that receives the final result |
+| Text | Template node with dynamic `{{variable}}` handle generation |
+| LLM | Represents a language model step |
+| API | Wraps an external API call |
+| Image | Handles image input or processing |
+| Math | Performs a numeric operation |
+| Filter | Filters data based on a condition |
+| Condition | Branches the pipeline on a boolean expression |
 
-All nodes share a single `BaseNode` component — adding a new node type is a matter of defining its fields and handles.
+All nine nodes share a single `BaseNode` component. Adding a new node type means defining its fields and handles — nothing else.
 
 ---
 
-## Tech stack
+## Tech Stack
 
 **Frontend**
 - React 18
@@ -48,7 +59,7 @@ All nodes share a single `BaseNode` component — adding a new node type is a ma
 
 ---
 
-## Project structure
+## Project Structure
 
 ```
 .
@@ -86,14 +97,11 @@ All nodes share a single `BaseNode` component — adding a new node type is a ma
 
 ---
 
-## Getting started
+## Getting Started
 
-### Prerequisites
+**Prerequisites:** Node.js ≥ 16, Python ≥ 3.9
 
-- Node.js ≥ 16
-- Python ≥ 3.9
-
-### Backend
+**Backend:**
 
 ```bash
 cd backend
@@ -101,9 +109,9 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-The API will be available at `http://localhost:8000`.
+API available at `http://localhost:8000`.
 
-### Frontend
+**Frontend:**
 
 ```bash
 cd frontend
@@ -111,17 +119,18 @@ npm install
 npm start
 ```
 
-Open `http://localhost:3000` in your browser.
+Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## API
+## API Reference
 
 ### `POST /pipelines/parse`
 
-Accepts the current pipeline and returns stats + DAG validity.
+Accepts the current pipeline graph and returns node/edge counts plus DAG validity.
 
-**Request body**
+**Request body:**
+
 ```json
 {
   "nodes": [{ "id": "node-1" }, { "id": "node-2" }],
@@ -129,7 +138,8 @@ Accepts the current pipeline and returns stats + DAG validity.
 }
 ```
 
-**Response**
+**Response:**
+
 ```json
 {
   "num_nodes": 2,
@@ -138,20 +148,24 @@ Accepts the current pipeline and returns stats + DAG validity.
 }
 ```
 
-DAG detection uses **Kahn's algorithm** (BFS-based topological sort). A pipeline with a cycle returns `is_dag: false`.
+DAG detection uses Kahn's algorithm (BFS-based topological sort). A pipeline with a cycle returns `"is_dag": false`.
 
 ---
 
-## Features worth noting
+## Features Worth Noting
 
-- **Text Node `{{variable}}` detection** — parses the textarea content in real time with a regex, deduplicates variable names, and renders one input handle per unique variable. The card also auto-resizes its width using a `<canvas>` measurement pass.
-- **BaseNode abstraction** — every node renders through the same shell. Input/output handles, labels, icons, and card styles are all props. No duplicated markup across node types.
-- **Dark mode** — implemented via a React context and CSS custom properties. The toggle in the navbar persists across re-renders without any external library.
-- **Responsive sidebar** — collapses on mobile with a CSS transform (no layout reflow), and shows an overlay to close it on small screens.
-- **Toast notifications** — meaningful success and error states shown after pipeline submission, themed to match the current color mode.
+**Text Node `{{variable}}` detection** — parses the textarea in real time with a regex, deduplicates variable names, and renders one input handle per unique variable. The card also auto-resizes its width using a `<canvas>` measurement pass.
+
+**`BaseNode` abstraction** — every node renders through the same shell. Input/output handles, labels, icons, and card styles are all props. No duplicated markup across node types.
+
+**Dark mode** — implemented via a React context and CSS custom properties. The toggle in the navbar persists across re-renders without any external library.
+
+**Responsive sidebar** — collapses on mobile with a CSS transform (no layout reflow), and shows an overlay to close it on small screens.
+
+**Toast notifications** — meaningful success and error states shown after pipeline submission, themed to match the current color mode.
 
 ---
 
-## Author
+Developed by **Md Sarfaraz Alam** — VectorShift Frontend Technical Assessment
 
-**Md Sarfaraz Alam** — VectorShift Frontend Technical Assessment
+[GitHub](https://github.com/Sarfarazsfz) · [LinkedIn](#) · sarfaraz.alam.dev@gmail.com
