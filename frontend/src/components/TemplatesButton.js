@@ -1,4 +1,4 @@
-import { useTheme } from './ThemeContext';
+
 import WidgetsIcon from '@mui/icons-material/Widgets';
 
 export const TemplatesButton = ({ onClick }) => {
