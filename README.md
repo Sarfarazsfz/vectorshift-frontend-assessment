@@ -1,14 +1,13 @@
 # VectorShift — Pipeline Builder
 
-![Status](https://img.shields.io/badge/status-submission_ready-success)
 ![VectorShift](https://img.shields.io/badge/VectorShift-Assessment-blue)
 ![React](https://img.shields.io/badge/React-18-blue?logo=react)
 ![React Flow](https://img.shields.io/badge/ReactFlow-Canvas-orange)
 ![Zustand](https://img.shields.io/badge/Zustand-State%20Management-purple)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green?logo=fastapi)
 ![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)
-![CSS](https://img.shields.io/badge/CSS-UI-blue?logo=css3)
 ![JavaScript](https://img.shields.io/badge/JavaScript-Frontend-yellow?logo=javascript)
+![Dark Mode](https://img.shields.io/badge/Theme-Dark%20Mode-black?logo=vercel)
 
 ## Overview
 A visual drag-and-drop pipeline builder built for the VectorShift Frontend Technical Assessment. It enables users to construct graph-based workflows using a React Flow canvas and validates the resulting topology against a FastAPI backend to ensure it forms a valid Directed Acyclic Graph (DAG).
@@ -16,16 +15,22 @@ A visual drag-and-drop pipeline builder built for the VectorShift Frontend Techn
 ## Screenshots
 
 ### Pipeline Builder Canvas
-![Pipeline Builder Canvas](./screenshots/canvas.png)
+<img width="1918" height="972" alt="image" src="https://github.com/user-attachments/assets/62c45bde-18a2-4afb-92e6-357b818a8a18" />
 
 ### Node Connections Example
-![Node Connections](./screenshots/connections.png)
+<img width="1918" height="982" alt="image" src="https://github.com/user-attachments/assets/8f006680-da1a-49b1-ae63-8ab1919ca68a" />
 
 ### Text Node Dynamic Variables
-![Text Node Variables](./screenshots/text-node.png)
+<img width="1918" height="975" alt="image" src="https://github.com/user-attachments/assets/c2828dbb-1994-4cde-b341-cbce8c28c177" />
 
 ### Pipeline Analysis Result Modal
-![Pipeline Analysis Result](./screenshots/result-modal.png)
+<img width="1918" height="887" alt="image" src="https://github.com/user-attachments/assets/93af0cdb-bf86-4ff2-a209-d8bed6d8c85f" />
+
+### 🌙 Dark Mode Interface
+
+<img width="1918" height="871" alt="image" src="https://github.com/user-attachments/assets/f0eb7808-b6b3-415d-82fb-3f8f8d7479b1" />
+
+---
 
 ## Features
 - **Reusable BaseNode abstraction**: A single, flexible wrapper `BaseNode` component powering all node variants, eliminating layout duplication.
@@ -115,4 +120,4 @@ VectorShift Frontend Technical Assessment Submission
 
 - **GitHub:** https://github.com/Sarfarazsfz
 - **Email:** sarfaraz.alam.dev@gmail.com
-- **LinkedIn:** (add your profile link)
+- **LinkedIn:** https://www.linkedin.com/in/faraz4237/
