@@ -7,7 +7,6 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green?logo=fastapi)
 ![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)
 ![JavaScript](https://img.shields.io/badge/JavaScript-Frontend-yellow?logo=javascript)
-![Dark Mode](https://img.shields.io/badge/Theme-Dark%20Mode-black?logo=vercel)
 
 ## Overview
 A visual drag-and-drop pipeline builder built for the VectorShift Frontend Technical Assessment. It enables users to construct graph-based workflows using a React Flow canvas and validates the resulting topology against a FastAPI backend to ensure it forms a valid Directed Acyclic Graph (DAG).
