@@ -1,5 +1,3 @@
-// nodes/index.js — Barrel export & node registry with MUI icons
-
 import InputIcon from '@mui/icons-material/Input';
 import OutputIcon from '@mui/icons-material/Output';
 import TextFieldsIcon from '@mui/icons-material/TextFields';
@@ -36,7 +34,7 @@ export const nodeTypes = {
 // Node configuration for the sidebar — grouped by category
 export const nodeConfig = [
     {
-        category: 'Core',
+        category: 'CORE',
         nodes: [
             { type: 'customInput', label: 'Input Node', icon: <InputIcon fontSize="small" /> },
             { type: 'customOutput', label: 'Output Node', icon: <OutputIcon fontSize="small" /> },
@@ -45,7 +43,7 @@ export const nodeConfig = [
         ],
     },
     {
-        category: 'Processing',
+        category: 'PROCESSING',
         nodes: [
             { type: 'math', label: 'Math Node', icon: <FunctionsIcon fontSize="small" /> },
             { type: 'filter', label: 'Filter Node', icon: <FilterAltIcon fontSize="small" /> },
@@ -53,7 +51,7 @@ export const nodeConfig = [
         ],
     },
     {
-        category: 'Integration',
+        category: 'INTEGRATION',
         nodes: [
             { type: 'image', label: 'Image Node', icon: <ImageIcon fontSize="small" /> },
             { type: 'api', label: 'API Node', icon: <ApiIcon fontSize="small" /> },

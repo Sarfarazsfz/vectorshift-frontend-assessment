@@ -1,5 +1,3 @@
-// imageNode.js
-
 import { useEffect, useState, memo } from 'react';
 import { BaseNode } from './BaseNode';
 import ImageIcon from '@mui/icons-material/Image';

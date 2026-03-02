@@ -1,6 +1,3 @@
-// textNode.js
-// Features: auto-resizing textarea, dynamic {{variable}} handle detection
-
 import { useState, useEffect, useRef, useMemo, memo } from 'react';
 import { BaseNode } from './BaseNode';
 import TextFieldsIcon from '@mui/icons-material/TextFields';

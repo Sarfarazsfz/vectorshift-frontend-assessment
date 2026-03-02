@@ -1,5 +1,3 @@
-// outputNode.js
-
 import { memo } from 'react';
 import { BaseNode } from './BaseNode';
 import OutputIcon from '@mui/icons-material/Output';

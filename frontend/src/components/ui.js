@@ -12,10 +12,12 @@ import { useStore } from '../store';
 import { shallow } from 'zustand/shallow';
 import { nodeTypes } from '../nodes';
 import { useTheme } from './ThemeContext';
+import CustomEdge from './CustomEdge';
 
 import 'reactflow/dist/style.css';
 
 const proOptions = { hideAttribution: true };
+const edgeTypes = { custom: CustomEdge };
 
 const selector = (state) => ({
   nodes: state.nodes,
@@ -113,7 +115,7 @@ export const PipelineUI = () => {
 
   // ── Edge appearance ────────────────────────────────────────
   const defaultEdgeOptions = {
-    type: 'smoothstep',
+    type: 'custom',
     animated: true,
     style: {
       stroke: isDark ? '#4A4A4A' : '#018790',
@@ -136,6 +138,7 @@ export const PipelineUI = () => {
         onDragOver={onDragOver}
         onInit={setReactFlowInstance}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         proOptions={proOptions}
         fitView
         fitViewOptions={{ padding: 0.15 }}

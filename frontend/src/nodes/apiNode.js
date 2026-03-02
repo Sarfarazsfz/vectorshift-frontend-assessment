@@ -1,5 +1,3 @@
-// apiNode.js
-
 import { memo } from 'react';
 import { BaseNode } from './BaseNode';
 import ApiIcon from '@mui/icons-material/Api';

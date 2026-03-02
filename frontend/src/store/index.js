@@ -13,6 +13,7 @@ export const useStore = createWithEqualityFn((set, get) => ({
   nodes: [],
   edges: [],
   nodeIDs: {},
+  pipelineName: 'Pipeline Builder',
 
   getNodeID: (type) => {
     const newIDs = { ...get().nodeIDs };
@@ -27,6 +28,21 @@ export const useStore = createWithEqualityFn((set, get) => ({
   addNode: (node) => {
     set({
       nodes: [...get().nodes, node],
+    });
+  },
+
+  removeNode: (nodeId) => {
+    set({
+      nodes: get().nodes.filter((n) => n.id !== nodeId),
+      edges: get().edges.filter(
+        (e) => e.source !== nodeId && e.target !== nodeId
+      ),
+    });
+  },
+
+  removeEdge: (edgeId) => {
+    set({
+      edges: get().edges.filter((e) => e.id !== edgeId),
     });
   },
 
@@ -47,7 +63,7 @@ export const useStore = createWithEqualityFn((set, get) => ({
       edges: addEdge(
         {
           ...connection,
-          type: 'smoothstep',
+          type: 'custom',
           animated: true,
           markerEnd: {
             type: MarkerType.Arrow,
@@ -71,5 +87,13 @@ export const useStore = createWithEqualityFn((set, get) => ({
         return node;
       }),
     });
+  },
+
+  clearCanvas: () => {
+    set({ nodes: [], edges: [], nodeIDs: {} });
+  },
+
+  setPipelineName: (name) => {
+    set({ pipelineName: name });
   },
 }), Object.is);

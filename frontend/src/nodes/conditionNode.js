@@ -1,5 +1,3 @@
-// conditionNode.js
-
 import { memo } from 'react';
 import { BaseNode } from './BaseNode';
 import CallSplitIcon from '@mui/icons-material/CallSplit';

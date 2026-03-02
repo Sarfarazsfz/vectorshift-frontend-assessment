@@ -1,5 +1,3 @@
-// llmNode.js
-
 import { memo } from 'react';
 import { BaseNode } from './BaseNode';
 import SmartToyIcon from '@mui/icons-material/SmartToy';

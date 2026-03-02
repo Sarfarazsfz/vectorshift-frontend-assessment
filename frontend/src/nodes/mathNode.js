@@ -1,5 +1,3 @@
-// mathNode.js
-
 import { memo } from 'react';
 import { BaseNode } from './BaseNode';
 import FunctionsIcon from '@mui/icons-material/Functions';

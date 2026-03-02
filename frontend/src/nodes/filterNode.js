@@ -1,5 +1,3 @@
-// filterNode.js
-
 import { memo } from 'react';
 import { BaseNode } from './BaseNode';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
